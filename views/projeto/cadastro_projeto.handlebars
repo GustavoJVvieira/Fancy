@@ -1,0 +1,197 @@
+{{>_navbar_projetos}}
+
+<style>
+  .num_projeto {
+    opacity: 60%;
+  }
+
+  .btn-primary {
+
+    font-size: 20px;
+    margin: 30px;
+    background-color: #ff81d5;
+    color: black;
+    border: none;
+  }
+
+  .btn-primary:hover {
+
+    background-color: #ff59cb;
+  }
+
+
+  .head_projetos {
+    height: 120px;
+  }
+
+  .tipo_peca {
+    opacity: 60%;
+  }
+
+  .conteudo_esquerda_projeto > div > input {
+  
+    border-radius: 10px;
+  }
+
+    .conteudo_direita_projeto > div > input {
+  
+    border-radius: 10px;
+  }
+
+
+  .input_peca_membro:focus{
+  
+    border-color: #ff59cb !important;
+  }
+
+  .check_finalizar {
+
+    height: 20px;
+    width: 20px;
+    
+  } 
+
+  .check_finalizar>:checked {
+  
+  color: yellow !important;
+  }
+
+
+  .conteudo_esquerda_projeto{
+  
+  
+    padding-right: 60px;
+  
+  }
+  @media (max-width: 1199px){
+  
+     .head_projetos {
+     
+        text-align: left !important;
+     }
+  }
+
+
+    @media (max-width: 767px){
+  
+     .input_projeto, .input_valor_peca {
+     
+        height: 70px;
+     }
+  }
+
+      @media (max-width: 1199px){
+  
+     .conteudo_esquerda_projeto {
+     
+        padding: 0px !important;
+     }
+  }
+
+
+</style>
+
+<br><br>
+<form action="/projeto/cadastrar" method="post">
+<div class="container"> 
+   
+    <div class="row conteudo_projeto">    
+      {{#each erros}}
+
+<div class="alert alert-danger">{{error}}</div>
+{{else}}
+
+{{/each}} 
+
+
+        <div class="col-12 col-sm-12 com-md-6 col-xl-6 conteudo_esquerda_projeto">
+            <div class="row col-12 mb-5 dados_nome_projeto">
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <h4>Nome do Corte:</h4>
+                </div>
+                <input class="col-sm-12 col-md-6 col-xl-6 input_projeto" type="text" name="nome_projeto" id="nome_projeto" placeholder="Nome">
+            </div>
+            <div class="row col-12 mb-5">
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <h4>Descrição do Corte:</h4>
+                </div>
+                <input class="col-sm-12 col-md-6 col-xl-6 input_projeto" type="text" name="desc_projeto" id="desc_projeto" placeholder="Descrição">
+            </div>
+            <div class="row col-12 mb-5">
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <h4>Data de início:</h4>
+                </div> 
+                <input class="col-sm-12 col-md-6 col-xl-6 input_projeto" type="date" name="data_inicio" id="data_inicio" placeholder="data início">
+            </div>
+            <div class="row col-12 mb-5 dados_nome_projeto">
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <h4>Data de entrega:</h4>
+                </div>
+                <input class="col-sm-12 col-md-6 col-xl-6 input_projeto" type="date"  name="data_fim" id="data_fim" placeholder="Data final">
+            </div>
+            <div class="row col-12 mb-5">
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <h4>Custo Inicial do Corte:</h4>
+                </div>
+                <input class="col-sm-12 col-md-6 col-xl-6 input_projeto" type="number" name="custo_projeto" id="custo_projeto" placeholder="Custo">
+            </div>
+            <div class="row col-12 mb-5">
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <h4>Valor recebido:</h4>
+                </div> 
+                <input class="col-sm-12 col-md-6 col-xl-6 input_projeto" type="number" name="valor_recebido" id="valor_recebido" placeholder="Valor recebido">
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 com-md-6 col-xl-6 conteudo_direita_projeto">
+      
+            <div class="row col-12 mb-5 conteudo_peca">
+                <div class="col-6">
+                    <h4>Descrição da Peça:</h4>
+                </div>
+
+                <input class="col-sm-12 col-md-6 col-xl-6 input_valor_peca" type="text" name="desc_peca" id="desc_peca" placeholder="Adicionar custo adicional">
+            </div>
+            <div class="row col-12 mb-5 conteudo_peca">
+                <div class="col-6">
+                    <h4>Quantidade de Peças:</h4>
+                </div>
+
+                <input class="col-sm-12 col-md-6 col-xl-6 input_valor_peca" type="number" name="quant_peca" id="quant_peca" placeholder="Adicionar custo adicional">
+            </div>
+            <div class="row col-12 mb-5 conteudo_peca">
+                <div class="col-6">
+                    <h4>Preço unitário da Peça:</h4>
+                </div>
+
+                <input class="col-sm-12 col-md-6 col-xl-6 input_valor_peca" type="number" name="valor_peca" id="valor_peca" placeholder="Adicionar custo adicional">
+            </div>
+
+            <div class="col-12 text-center">
+                <div class="col-6">
+                  <h4>Fornecedores:</h4>
+                </div>
+
+                {{#each fornecedor}}
+                
+                <input type="radio" name="fornecedor" id="fornecedor" value="{{id}}"><b>{{nome}} </b>
+                
+                {{else}}
+                <h6>Sem fornecedor Cadastrado</h6>
+                {{/each}}
+                  
+       
+            
+        </div>
+
+        <div class="col-12 text-center">
+        <button class="btn btn-primary" type="submit" >Atualizar Dados </button>
+        </div>
+    </div>
+    </div>
+    
+
+   </div>
+</div>
+</div>
+</form>
+

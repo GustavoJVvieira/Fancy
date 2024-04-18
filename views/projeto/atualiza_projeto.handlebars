@@ -1,0 +1,167 @@
+
+
+<!--
+ <h3>Atualização do Projeto</h3>
+
+<form action="/projeto/atualizar" method="post">
+
+{{#each membros}}
+<br>
+    <label for="membros_at">Quantidade de Peças Feita {{nome_membros}}</label>
+    <input type="text" name="membro_{{id_membros}}" id="membro_{{id_membros}}" placeholder="Digite a quantidade de peças feitas" class="form-control" >
+{{/each}}
+
+<br>
+{{#each projeto}}
+<input type="hidden" name ="data_inicio" id = "data_inicio"  value="{{data_inicio}}">
+<input type="hidden" name ="data_fim" id = "data_fim"  value="{{data_fim}}">
+<input type="hidden" name="projeto" id="projeto" value="{{id}}">
+{{else}}
+{{/each}}
+
+
+
+<br>
+<label for="data"> Data de Atualização: </label>
+<input type="date" name="data" id="data" >
+<br>
+<br>
+<label for="observacao">Observação: </label>
+<input type="text" name = "observacao" id = "observacao" placeholder="Insira uma Observação sobre a Atualização" class="form-control">
+<br>
+<label for="c_adc">Custo Adicional: </label>
+<input type="text" name="c_adc" id="c_adc" placeholder="Insira o Custo Adicional do Projeto" class="form-control">
+<br> 
+
+<input type="checkbox" name="finaliza" id="finaliza" value="sim"> Finalizar Projeto
+<br>
+<br>
+<button type="submit" class=" btn btn-dark  ">Enviar Atualização</button>
+</form>
+
+-->
+
+<style>
+  .num_projeto {
+    opacity: 60%;
+  }
+
+  .btn-primary {
+
+    font-size: 20px;
+    margin: 30px;
+    background-color: #ff81d5;
+    color: black;
+    border: none;
+  }
+
+  .btn-primary:hover {
+
+    background-color: #ff59cb;
+  }
+
+  
+
+  .head_projetos {
+    height: 120px;
+  }
+
+  .input_peca_membro, .input_custo {
+  
+    border-radius: 10px;
+  }
+
+  .input_peca_membro:focus{
+  
+    border-color: #ff59cb !important;
+  }
+
+  .check_finalizar {
+
+    height: 20px;
+    width: 20px;
+  } 
+
+  .check_finalizar>:checked {
+  
+  color: yellow !important;
+  }
+</style>
+
+{{>_navbar_projetos}}
+{{#each erros}}
+<div class="alert alert-danger">{{error}}</div>
+{{else}}
+
+{{/each}}
+<br><br><br><br>
+<div class="container">
+<form action="/projeto/atualizar" method="post">
+<br><br><br>
+    <div class="row conteudo_projeto">
+        <div class="col-6 conteudo_esquerda_projeto">
+            {{#each membros}}
+            <div class="row col-12 mb-5 conteudo_pecas">
+                <div class="col-6">
+
+                    <h4>Quantidade de peças feitas por {{nome_membros}}</h4>
+                </div>
+                <input class="col-5 input_peca_membro" type="text" name="membro_{{id_membros}}" id="membro_{{id_membros}}" placeholder="Adicionar quantidade peça">
+            </div>
+            {{/each}}
+
+        </div>
+        <div class="col-6 conteudo_direita_projeto">
+            <div class="row col-12 mb-5 conteudo_custo">
+                <div class="col-6">
+                    <h4>Custo Adicional</h4>
+                </div>
+
+                <input class="col-6 input_custo" type="text" name="c_adc" id="c_adc" placeholder="Adicionar custo adicional">
+            </div>
+
+           <div class="col-12 mb-5  d-flex justify-content-center">
+                <h4 class="col-6">
+                  Data da Atualização
+                </h4>
+
+                <input class = "col-6 input_custo" type="date" name="data" id="data" >
+                
+            </div>
+
+            <div class="col-12 mb-5   d-flex justify-content-center">
+                <h4 class="col-6">
+                  Observação
+                </h4>
+                <input class = "col-6 input_custo" type="text" name = "observacao" id = "observacao" placeholder=" Observação sobre a Atualização" class="form-control">
+                
+            </div> 
+            <div class="col-12 d-flex justify-content-center">
+                <input class="form-check-input check_finalizar" type="checkbox" name = "finaliza" value="sim" id="finaliza" style="margin-top: 5px; margin-right: 10px">
+                <h4>
+                  Finalizar projeto
+                </h4>
+            </div>
+
+            
+            
+        </div>
+
+    {{#each projeto}}
+    <input type="hidden" name="data_inicio" id="data_inicio" value="{{data_inicio}}">
+    <input type="hidden" name="data_fim" id="data_fim" value="{{data_fim}}">
+    <input type="hidden" name="projeto" id="projeto" value="{{id}}">
+    {{else}}
+    {{/each}}
+
+
+        <div class="col-12 text-center">
+        <button class="btn btn-primary" type="submit" >Atualizar Dados </button>
+        </div>
+    </div>
+    
+
+   </div>
+</div>
+</form>
+</div>

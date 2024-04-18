@@ -1,0 +1,381 @@
+
+<style>
+
+  /* link que ainda não foi visitado */
+a:link {
+   color: black;
+}
+
+/* link que foi visitado */
+a:visited {
+    color: black;
+}
+
+/* mouse over */
+a:hover {
+    color: pink;
+}
+
+/* link selecionado */
+a:active {
+    color: black;
+}
+
+  .btn-primary {
+
+    width: 100px;
+    background-color: #ff81d5;
+    color: black;
+    border: none;
+  }
+
+  .btn-primary:hover {
+
+    background-color: #ff59cb;
+  }
+.navbar{
+            opacity: 90%;
+        }    
+        
+  .barra {
+    width: 5px;
+    height: 60px;
+    color: black !important;
+  }
+
+  .titulo_projeto,
+  .titulo_usuario {
+
+    margin: 50px 0px 50px 0px;
+
+  }
+
+  .icone_membros,
+  .icone_fornecedores {
+
+    margin: 15px 0px 0px 15px;
+  }
+
+  .menu_add_fornecedores, 
+  .menu_add_membros {
+  
+    margin: 10px 0px 100px 15px;
+  }
+
+  .opacidade {
+
+    opacity: 80%;
+  }
+
+  .caixa{
+
+    width : 15vw; 
+    height : 15vw;
+
+    color: pink;
+
+  }
+
+
+</style>
+
+
+{{>_navbar}}
+
+
+
+
+<br><br>
+<div class="container">
+
+{{#each erros}}
+<div class="alert alert-danger">{{error}}</div>
+{{else}}
+<div class="">{{success_msg}}</div>
+{{/each}}
+
+
+  <div class="row">
+
+   <div class="col-sm-10">
+      <div class="row titulo_usuario opacidade">
+        {{#each perfil}}
+        <div>
+          <h4>Olá <b>{{nome}}</b></h4>
+        </div>
+        {{else}}
+        {{/each}}
+      </div>
+
+      <div class="row col-12 menu_add_membros">
+        <div class="col-12 d-flex">
+          <div class="titulo_membros">
+            <h3 class="opacidade">Meus membros</h3>
+          </div>
+          <div class="icone_membros">
+            <span class="material-symbols-outlined">
+              expand_more
+            </span>
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-sm-1">
+              {{#each membros}}
+              <h6>{{nome_membros}}</h6>
+              {{/each}}
+            </div>
+            <div class="col-sm-1">
+          
+              {{#each membros}}
+              <form action="/usuario/deletar_membro" method="post">
+          
+                <input type="hidden" name="membro" id="membro" value="{{id_membros}}">
+          
+                <button type="submit" class="btn btn-danger mw-20" style="width: 6vw; height: 2,5vw;">Deletar</button>
+              </form>
+              {{else}}
+          
+              {{/each}}
+            </div>
+          
+          </div>
+
+<br>
+
+          <div class="col-12 text-left">
+            <a href="/usuario/cadastro_membros">+ Adicionar membros</a>
+          </div>
+        </div>
+
+
+      <div class=" col-sm-10 menu_add_fornecedores">
+        <div class="col-12 d-flex">
+          <div class="titulo_fornecedores">
+            <h3 class="opacidade">Meus fornecedores</h3>
+          </div>
+          <div class="icone_fornecedores">
+            <span class="material-symbols-outlined">
+              expand_more
+            </span>
+          </div>
+        </div>
+
+         <div class="row">
+                    <div class="col-sm-1">
+                        {{#each fornecedor}}
+                        <h6>{{nome}}</h6>
+                        {{/each}}
+                    </div>             
+                     <div class="col-sm-1">
+                        {{#each fornecedor}}
+                        <form action="/usuario/deletar_fornecedor" method="post">
+                            
+                            <input type="hidden" name="fornecedor" id="fornecedor" value="{{id}}">
+                                
+                        <button type="submit" class="btn btn-danger " style="width: 6vw; height: 2,5vw;">Deletar</button>
+                        </form>
+                      {{/each}}
+                    </div>
+                </div>
+
+
+          <div class="col-3 text-end"> 
+          <div class="col-12 text-left">
+            <a href="/usuario/cadastro_fornecedor">+ Adicionar fornecedores</a>
+          </div>
+        </div>
+
+      </div>
+
+   
+
+</div>
+
+
+
+    <div class="col-sm-2">
+      <div class="col titulo_projeto opacidade">
+        <h3 class="col-sm-12 text-end ">Meus Cortes: </h3>
+
+        <div class="col-sm-12 text-end ">
+
+          <a href="../projeto/" class="btn btn-dark">
+            <div class="caixa" style="">
+
+
+              {{#each projeto }}
+
+              <h4>{{nome}}</h4>
+              <br>
+              <p>Data de Inicio : </p>
+
+              <p>{{data_inicio}}</p>
+              <br>
+              <p>Valor : R${{valor_recebido}}</p>
+              <br>
+
+              {{/each}}
+
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+
+ 
+
+</div>
+
+
+
+
+
+</div>
+
+
+ 
+<!--
+{{>_navbar}}
+<br><br>
+{{#each perfil}}
+<div>
+    <h4>Olá <b>{{nome}}</b></h4>
+</div>
+{{else}}
+{{/each}}
+
+<br><br>
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm">
+            <h4>
+                <center>Membros Cadastrados : </center>
+            </h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <br>
+                        <h6>Nome:</h6>
+                        <br>
+                        {{#each membros}}
+                        <h6>{{nome_membros}}</h6>
+                        {{else}}
+                        <h6>Membro não Cadastrado</h6>
+                        {{/each}}
+                    </div>
+                    <div class="col-sm">
+                        <br>
+                        <h6>Endereço:</h6>
+                        <br>
+                        {{#each membros}}
+                        <h6>{{endereco_membros}} </h6>
+                        
+                        {{else}}
+                        <h6>Endereço não Cadastrado</h6>
+                        {{/each}}
+                    </div>
+                    <div class="col-sm">
+                        <br>
+                        <br>
+                        <br>
+                        {{#each membros}}
+                        <form action="/usuario/deletar_membro" method="post">
+                            
+                            <input type="hidden" name="membro" id="membro" value="{{id_membros}}">
+                                
+                                <button type="submit" class="btn btn-danger mw-20" style="width: 6vw; height: 2,5vw;">Deletar</button>
+                        </form>
+                        {{else}}
+                   
+                        {{/each}}
+                    </div>
+                    <br><br>
+                    <a href="usuario/cadastro_membros" class="btn btn-dark">+ Adicionar Membro</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="col-sm">
+            <h4>
+                <center>Fornecedores Cadastrados : </center>
+            </h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <br>
+                        <h6>Nome:</h6>
+                        <br>
+                        {{#each fornecedor}}
+                        <h6>{{nome}}</h6>
+                        {{else}}
+                        <h6>Fornecedor não Cadastrado</h6>
+                        {{/each}}
+                    </div>
+                
+                    <br><br>
+                     <div class="col-sm">
+                        <br>
+                        <br>
+                        <br>
+                        {{#each fornecedor}}
+                        <form action="/usuario/deletar_fornecedor" method="post">
+                            
+                            <input type="hidden" name="fornecedor" id="fornecedor" value="{{id}}">
+                                
+                        <button type="submit" class="btn btn-danger " style="width: 6vw; height: 2,5vw;">Deletar</button>
+                        </form>
+                        {{else}}
+                            
+                        {{/each}}
+                    </div>
+                    <a href="usuario/cadastro_fornecedor" class="btn btn-dark">+ Adicionar Fornecedor</a>
+                </div>
+            </div>
+        </div>
+
+    
+
+        <div class="col-sm">
+            <h4>Projeto Cadastrados: </h4>
+            <br>
+
+            <a href="../projeto/" class="btn btn-dark">
+            <div class="container" style="width : 15vw; height : 15vw;">
+                
+                
+                    {{#each projeto }}
+
+                    <h4>{{nome}}</h4>
+                    <br>
+                    <p>Data de Inicio : </p>
+                    
+                    <p>{{data_inicio}}</p>
+                    <br>
+                    <p>Valor : R${{valor_recebido}}</p>
+                    <br>
+                
+                  {{/each}}
+                  
+            </div>
+            </a>
+        
+        
+        </div>
+    </div>
+</div>
+
+<br>
+<br> -->
