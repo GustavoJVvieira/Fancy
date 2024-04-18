@@ -1,0 +1,111 @@
+
+
+<style>
+    .barra {
+        width: 5px;
+        height: 60px;
+        color: black !important;
+    }
+
+    .table {
+
+        margin: 30px 0px 0px 0px;
+        border: 1px solid black;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .colunas_tabela {
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .barra_procura {
+    
+        margin-top: 30px;
+    }
+    .txt_procurar {
+
+        height: 40px;
+        border-radius: 15px;
+    }
+
+    .icone_historico {
+    
+        margin: 8px 0px 0px 0px;
+    }
+
+
+    .opacidade {
+    
+        opacity: 80%;
+    }
+
+.texto {
+
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+</style>
+
+{{>_navbar_projetos}}
+
+{{#each erros}}
+<div class="alert alert-danger">{{error}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="container">
+<br><br>
+        <div class="row ">
+            <div class="col-9 opacidade">
+                <h2><center> Histórico de Cortes </center></h2>
+            </div>
+           
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr class="colunas_tabela">
+                    <th scope="col">Nome do Corte:</th>
+                    <th scope="col">Descrição:</th>
+                    <th scope="col">Data início:</th>
+                    <th scope="col">Data fim:</th>
+                    <th scope="col">Valor Recebido:</th>
+                    <th scope="col">Lucro Final:</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+              {{#each projeto}}
+              <form action="/projeto/apagar" method="post">
+                    <th scope="row">{{nome}}</th>
+                    <td>{{desc_projeto}}</td>
+                    <td>{{data_inicio}}</td>
+                    <td>{{data_fim}}</td>
+                    <td>R${{valor_recebido}},00</td>
+                    <td>R${{valor_final}},00</td>
+                     
+                    <td>
+                      
+                        <input type="hidden" name="id" id="id" value="{{id}}">
+                        <button type="submit" class="btn btn-danger " style="width: 5vw; height: 2,5vw;">Deletar</button>
+                      
+                      </form>   
+                      </td> 
+                     </tr>
+                  {{/each}}
+
+
+            </tbody>
+        </table>
+   
+</div>
+
+
+
+
+
+
+
+

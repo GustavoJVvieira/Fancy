@@ -1,0 +1,120 @@
+<style>
+   .table {
+
+        margin: 30px 0px 0px 0px;
+        border: 1px solid black;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        
+
+      
+    }
+
+    .colunas_tabela {
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+  .opacidade {
+
+    opacity: 80%;
+  }
+</style>
+{{>_navbar_projetos}}
+<div class="header">
+<br><br>
+
+<div class="container">
+
+<form>
+  <br><br>
+
+<table class="table table-striped">
+            <thead>
+              <tr> <center><h3>Sequência Operacional</h3></center></tr>
+                <tr class="colunas_tabela">
+                    <th scope="col">Máquina:</th>
+                    <th scope="col">Descrição:</th>
+                    <th scope="col">Tempo:</th>
+                </tr>
+            </thead>
+            <tbody>
+              {{#each sequencia}}
+              
+                    <th scope="row"> {{maquina}}</th>
+                    <td scope="row">{{descricao}}</td>
+                    <td scope="row">{{tempo}}</td>                    
+                     </tr>
+                  {{/each}}
+
+            </tbody>
+        </table>
+
+<br><br>
+<div class="row">
+
+<div class="col-sm-6">
+ <h6 class="opacidade">Tempo gasto por peça: <b> {{tempo}} minutos </b>   </h6>
+</div>
+
+<div class="col-sm-6">
+ 
+  <h6 class="opacidade">Quantidade de Dias para a Realização do Corte: <b> {{dias_}} dias </b></h6>
+</div>
+  </div>
+
+<br>
+{{#each projeto}}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h6 class="opacidade">Data de Inicio do Corte: <b> {{data_inicio}} </b></h6>
+    </div>
+    <div class="col-sm">
+      <h6 class="opacidade">Data de Finalização do Corte : <b> {{data_fim}} </b></h6>
+    </div>
+    <div class="col-sm">
+     <h6 class="opacidade">Valor Unitário: <b> R$ {{valor_peca}},00  </b></h6>
+    </div>
+  </div>
+</div>
+{{/each}}
+<br><br><br>
+<div class="row">
+
+<div class="col-sm-6">
+
+<h6 class="opacidade">Quantidade de peças a serem feitas por dia : <b> {{por_dia}} por dia</b></h6>
+<br>
+<h6 class="opacidade">Arrecadação por dia : <b> R${{valor_dia}} por dia</b></h6>
+</div>
+
+<div class="col-sm-6">
+<h6 class="opacidade">Maximo possivel de peças por dia : <b> {{horas}} peças</b>  </h6>
+<br>
+<h6 class="opacidade">Maximo possivel de se arrecadar por dia: <b> R${{valor_maximo}}</b></h6>
+</div>
+
+
+
+</div>
+
+<center><h4><font color = "red">{{teste}}</font></h4></center>
+<br><br><br>
+</form>
+</div>
+
+
+ <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>

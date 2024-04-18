@@ -1,0 +1,216 @@
+{{>_navbar_projetos}}
+
+<style>
+
+        .btn-primary {
+
+            width: 100px;
+            background-color: #ff81d5;
+            color: black;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+
+            background-color: #ff59cb;
+        }
+
+        .navbar{
+            opacity: 90%;
+        }    
+
+        .barra {
+            width: 5px;
+            height: 60px;
+            color: black !important;
+        }
+
+        .opacidade {
+
+            opacity: 80%;
+        }
+
+        .textData{
+            font-size: 24px;
+        }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    display: flex;
+    width: 100px;
+    padding: 50px 0;
+    border-radius: 8px;
+    background: #fff;
+    row-gap: 30px;
+    flex-direction: column;
+    
+}
+.circular-progress{
+    position: relative;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    background: conic-gradient(#7d2ae8 3.6deg, #ededed 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circular-progress::before{
+    content: "";
+    position: absolute;
+    height: 210px;
+    width: 210px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.progress-value{
+    position: relative;
+    font-size: 40px;
+    font-weight: 600;
+    color: #7d2ae8;
+}
+.text{
+    font-size: 20px;
+    font-weight: 400;
+    color: #606060;
+}
+
+.main{
+
+    max-width: 1000px;
+}
+
+</style>
+
+
+<br>
+
+{{#each projeto}}
+    <div class="container_principal">
+        <div class="row mt-5 mb-4">
+            <div class="col-6 text-left">
+                <h1 class="opacidade"><b>{{nome}}</b></h1>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-6 text-left">
+                <div>
+                    <p class="textData">Data Início: {{data_inicio}}</p>
+                </div>
+                <div>
+                    <p class="textData">Data Fim: {{data_fim}}</p>
+                </div>
+
+   
+            </div>
+            <div class="col-6">
+                <div>
+                    <p class="textData">Valor: R${{valor_recebido}},00</p>
+                </div>
+
+                <div class="col-6">
+                   <a href="/projeto/atualizar "> <input class="btn btn-primary btn-lg" type="button" value="Atualizar dados"></a>
+                </div>
+            </div>
+
+        </div>
+
+
+{{/each}}
+<br><br><br>
+
+
+<div class="row">
+<div class = "col-sm-6">
+<!-- Grafico do charts.js -->
+<div class="main" >
+    <canvas id = "myChart" width="500px"></canvas>
+   </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+
+const ctx = document.getElementById("myChart");
+const labels = [
+
+    {{#each producao}}"{{data_his}}",{{/each}}
+];
+
+
+
+const data = {
+    labels,
+    datasets: [{
+       
+        data: [{{#each producao}} {{total}}, {{/each}}],
+        label: "Produção de Peças",
+        fill: true,
+        backgroundColor : "pink"
+    }]
+
+}
+
+const config = {
+
+    type : "line",
+    data,
+    options: {
+        responsive : true
+
+    }
+}
+
+const myChart = new Chart(ctx, config)
+</script>
+</div>
+
+
+<div class = "col-sm-3">
+<!-- Grafico de pizza -->
+<div class="container">
+            <div class="circular-progress">
+                <span class="progress-value">{{porcentagem}}%</span>
+            </div>
+
+            <span class="text">Porcentagem Feita do Corte</center></span>
+        </div>
+
+        <!-- JavaScript -->
+        <script>
+
+           let circularProgress = document.querySelector(".circular-progress"),
+    progressValue = document.querySelector(".progress-value");
+
+let progressStartValue = 0,    
+    progressEndValue = {{porcentagem}},    
+    speed = 20;
+    
+let progress = setInterval(() => {
+    progressStartValue++;
+
+    progressValue.textContent = `${progressStartValue}%`
+    circularProgress.style.background = `conic-gradient(#7d2ae8 ${progressStartValue * 3.6}deg, #ededed 0deg)`
+
+    if(progressStartValue == progressEndValue){
+        clearInterval(progress);
+    }    
+}, speed);
+        </script>
+
+</div>
+
+</div>
+
+    </body>
+</html>
